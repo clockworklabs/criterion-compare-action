@@ -108,7 +108,7 @@ async function main() {
     );
     core.setOutput("comment-id", comment.id);
   } catch (err) {
-    core.warning(`Failed to comment: ${err}`);
+    core.warning(`Failed to comment: ${err}, payload: ${createCommentPayload}`);
     core.info("Commenting is not possible from forks.");
 
     // If we can't post to the comment, display results here.
