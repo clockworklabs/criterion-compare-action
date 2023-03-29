@@ -88,12 +88,19 @@ async function main() {
 
   try {
     const issueNumber = process.env.PR_NUMBER || context.issue.number;
-    const { data: comment } = await octokit.rest.issues.createComment({
+    const createCommentPayload = {
       owner: contextObj.owner,
       repo: contextObj.repo,
-      issue_number: issueNumber,
       body: resultsAsMarkdown,
-    });
+    };
+
+    if (issueNumber) {
+      createCommentPayload['issue_number'] = issueNumber;
+    } else {
+      createCommentPayload['commitSha'] = context.commit.sha;
+    }
+
+    const { data: comment } = await octokit.rest.issues.createComment(createCommentPayload);
     core.info(
       `Created comment id '${comment.id}' on issue '${issueNumber}' in '${contextObj.repo}'.`
     );
