@@ -6,6 +6,7 @@ const github = require("@actions/github");
 const context = github.context;
 
 async function main() {
+  core.warning("FOOOFOFOFOFOFO");
   const inputs = {
     token: core.getInput("token", { required: true }),
     branchName: core.getInput("branchName", { required: true }),
