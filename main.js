@@ -84,17 +84,18 @@ async function main() {
   // An authenticated instance of `@octokit/rest`
   const octokit = github.getOctokit(inputs.token);
 
-  const contextObj = { ...context.issue };
+  const contextObj = { ...context.repo };
 
   try {
+    const issueNumber = process.env.PR_NUMBER || context.issue.number;
     const { data: comment } = await octokit.rest.issues.createComment({
       owner: contextObj.owner,
       repo: contextObj.repo,
-      issue_number: contextObj.number,
+      issue_number: issueNumber,
       body: resultsAsMarkdown,
     });
     core.info(
-      `Created comment id '${comment.id}' on issue '${contextObj.number}' in '${contextObj.repo}'.`
+      `Created comment id '${comment.id}' on issue '${issueNumber}' in '${contextObj.repo}'.`
     );
     core.setOutput("comment-id", comment.id);
   } catch (err) {
