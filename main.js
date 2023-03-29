@@ -97,7 +97,7 @@ async function main() {
     if (issueNumber) {
       createCommentPayload['issue_number'] = issueNumber;
     } else {
-      createCommentPayload['commitSha'] = context.commit.sha;
+      createCommentPayload['commitSha'] = context.sha;
     }
 
     const { data: comment } = await octokit.rest.issues.createComment(createCommentPayload);
