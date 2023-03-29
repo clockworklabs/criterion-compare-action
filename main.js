@@ -100,6 +100,8 @@ async function main() {
       createCommentPayload['commit_sha'] = context.sha;
     }
 
+    core.warning(`comment payload: ${createCommentPayload}`);
+
     const { data: comment } = await octokit.rest.issues.createComment(createCommentPayload);
     core.info(
       `Created comment id '${comment.id}' on issue '${issueNumber}' in '${contextObj.repo}'.`
