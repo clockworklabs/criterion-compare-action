@@ -101,6 +101,7 @@ async function main() {
     }
 
     core.warning(`comment payload: ${createCommentPayload}`);
+    core.warning(`context.repo: ${contextObj}`);
 
     const { data: comment } = await octokit.rest.issues.createComment(createCommentPayload);
     core.info(
