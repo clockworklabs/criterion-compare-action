@@ -253,10 +253,9 @@ function convertToMarkdown(results) {
   <details>
     <summary>Click to view benchmark</summary>
 
-| Test | Base         | PR               | % |
-|------|--------------|------------------|---|
-${benchResults}
-
+\`\`\`
+${results}
+\`\`\`
   </details>
   `;
 }
