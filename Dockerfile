@@ -1,5 +1,7 @@
 FROM rust
 
+RUN rustup --version && rustup self update && rustup --version
+
 LABEL "com.github.actions.name"="Criterion compare"
 LABEL "com.github.actions.description"="Compare the performance of a PR against master"
 LABEL "com.github.actions.icon"="refresh-cw"
