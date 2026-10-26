@@ -14,7 +14,7 @@ LABEL "com.github.actions.color"="purple"
 RUN cargo install critcmp
 
 # Install Node.js
-# Node 22.23.4 includes the October security fixes and updated CA roots.
+# Node 22.23.4 distrusts compromised eMudhra/emSign CAs (October 2026).
 ENV NODE_VERSION 22.23.4
 ENV PATH /root/.nvm/versions/node/v$NODE_VERSION/bin:$PATH
 RUN curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
