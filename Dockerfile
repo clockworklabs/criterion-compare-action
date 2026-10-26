@@ -1,5 +1,6 @@
 FROM rust
 
+# Refresh CA trust after the emSign compromise, even if already installed.
 RUN apt-get update && apt-get install --reinstall -y --no-install-recommends ca-certificates && rm -rf /var/lib/apt/lists/*
 
 RUN rustup --version && rustup self update && rustup --version
@@ -13,6 +14,7 @@ LABEL "com.github.actions.color"="purple"
 RUN cargo install critcmp
 
 # Install Node.js
+# Node 22.23.4 includes the October security fixes and updated CA roots.
 ENV NODE_VERSION 22.23.4
 ENV PATH /root/.nvm/versions/node/v$NODE_VERSION/bin:$PATH
 RUN curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash
